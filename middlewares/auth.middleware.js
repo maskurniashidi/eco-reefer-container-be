@@ -1,5 +1,5 @@
 const { body, validationResult } = require("express-validator");
-require("dotenv").config();
+// require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { db } = require("../routes/firebase");
 
@@ -26,7 +26,7 @@ const checkJWT = async (req, res, next) => {
   if (auth) {
     try {
       const token = await auth.split(" ")[1];
-      const verified = jwt.verify(token, process.env.JWTKEY);
+      const verified = jwt.verify(token, "zahro-secret");
 
       if (verified) {
         req.verified = verified;

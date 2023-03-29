@@ -1,10 +1,10 @@
 const mqtt = require("mqtt");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+// require("dotenv").config();
 const { db } = require("./routes/firebase");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 3001;
 const router = require("./routes");
 
 // MQTT
