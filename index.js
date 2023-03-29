@@ -1,10 +1,10 @@
 const mqtt = require("mqtt");
 const express = require("express");
 const cors = require("cors");
-// require("dotenv").config();
+require("dotenv").config();
 const { db } = require("./routes/firebase");
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT;
 const router = require("./routes");
 
 // MQTT
@@ -63,7 +63,6 @@ app.get("/api/sensor", async (req, res) => {
   dataArray.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
   res.send(dataArray);
 });
-
 app.post("/api/publish", (req, res) => {
   // publish a message to the topic
   console.log(req.body);

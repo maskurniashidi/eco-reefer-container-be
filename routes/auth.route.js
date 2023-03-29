@@ -1,6 +1,6 @@
 const express = require("express");
 const authRouter = express.Router();
-// require("dotenv").config();
+require("dotenv").config();
 
 const { validateRegister } = require("../middlewares/auth.middleware");
 const { db } = require("./firebase");
@@ -67,7 +67,7 @@ authRouter.post("/login", async (req, res) => {
           fullName: arrayUser[0].fullName,
           role: arrayUser[0].role,
         },
-        "zahro-secret",
+        process.env.JWTKEY,
         { expiresIn: "1d" }
       );
 
