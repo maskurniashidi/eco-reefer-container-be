@@ -21,9 +21,21 @@ client.on("connect", () => {
 
 client.on("message", (topic, message) => {
   const date = new Date();
+
+  // Mengambil informasi tanggal dan waktu dari objek Date
+  const year = date.getUTCFullYear();
+  const month = ("0" + (date.getUTCMonth() + 1)).slice(-2);
+  const day = ("0" + date.getUTCDate()).slice(-2);
+  const hours = ("0" + (date.getUTCHours() + 7)).slice(-2);
+  const minutes = ("0" + date.getUTCMinutes()).slice(-2);
+  const seconds = ("0" + date.getUTCSeconds()).slice(-2);
+  // temp1#temp2#temp3#arus#tegangan#daya#status#setPoint
+  // Menggabungkan informasi tanggal dan waktu dalam format yang diinginkan
+  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}Z`;
+  console.log(formattedDateTime);
   const data = {
     value: message.toString(),
-    created_at: date.toLocaleString(),
+    created_at: formattedDateTime,
   };
   const numPagar = data.value.split("#").length - 1;
   if (numPagar > 2) {

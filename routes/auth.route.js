@@ -91,4 +91,14 @@ authRouter.post("/login", async (req, res) => {
   }
 });
 
+authRouter.get("/users", async (req, res) => {
+  const dataDb = db.collection("users");
+  const response = await dataDb.get();
+  let dataArray = [];
+  response.forEach((doc) => {
+    dataArray.push(doc.data());
+  });
+  res.send(dataArray);
+});
+
 module.exports = authRouter;
