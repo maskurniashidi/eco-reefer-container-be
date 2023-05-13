@@ -6,19 +6,19 @@ const dataRouter = require("./data.route");
 const { db } = require("./firebase");
 const Sensor = require("../models/Sensor");
 // MQTT
-const brokerUrl = "mqtt://test.mosquitto.org:1883";
-const topic = "topic_zahro";
-const client = mqtt.connect(brokerUrl, {
-  username: "",
-  password: "",
-});
-
-// const brokerUrl = "mqtt://103.162.253.243:1883";
-// const topic = "RC_20FT_1";
+// const brokerUrl = "mqtt://test.mosquitto.org:1883";
+// const topic = "topic_zahro";
 // const client = mqtt.connect(brokerUrl, {
-//   username: "refe",
-//   password: "Tr4N5F0Rm3R",
+//   username: "",
+//   password: "",
 // });
+
+const brokerUrl = "mqtt://103.162.253.243:1883";
+const topic = "RC_20FT_1";
+const client = mqtt.connect(brokerUrl, {
+  username: "refe",
+  password: "Tr4N5F0Rm3R",
+});
 
 // TOPIC 1
 client.on("connect", () => {

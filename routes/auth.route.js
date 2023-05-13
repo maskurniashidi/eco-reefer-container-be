@@ -1,7 +1,6 @@
 const express = require("express");
 const authRouter = express.Router();
 const bodyParser = require("body-parser");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
@@ -14,8 +13,8 @@ authRouter.post("/register", async (req, res) => {
     if (userExists) {
       return res.status(400).json({ error: "Email already exists" });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ name, email, password: hashedPassword });
+    // const hashedPassword = await bcrypt.hash(password, 10);
+    const user = await User.create({ name, email, password });
     res.status(201).json({ user });
   } catch (error) {
     res.status(400).json({ error });
@@ -29,8 +28,8 @@ authRouter.post("/login", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    const isValidPassword = await bcrypt.compare(password, user.password);
-    if (!isValidPassword) {
+    // const isValidPassword = await bcrypt.compare(password, user.password);
+    if (password !== user.password) {
       return res.status(401).json({ error: "Invalid password" });
     }
     const token = jwt.sign({ id: user.id }, "zahro_secret");
